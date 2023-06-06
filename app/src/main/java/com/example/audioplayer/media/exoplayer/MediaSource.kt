@@ -13,8 +13,8 @@ import javax.inject.Inject
 
 class MediaSource @Inject constructor(private val audioRepository: AudioRepository) {
 
-    private val onReadyListeners: MutableList<OnReadyListener> = mutableListOf()
-    private val audioMediaMetaData: List<MediaMetadataCompat> = emptyList()
+     val onReadyListeners: MutableList<OnReadyListener> = mutableListOf()
+     val audioMediaMetaData: List<MediaMetadataCompat> = emptyList()
     private var state: AudioSourceState = AudioSourceState.STATE_CREATED
     set(value) {
         if(value == AudioSourceState.STATE_CREATED ||
@@ -84,7 +84,7 @@ class MediaSource @Inject constructor(private val audioRepository: AudioReposito
         return concatenatingMediaSource
     }
 
-    fun getMediaDescription() = audioMediaMetaData.map { metaData ->
+    fun asMediaItem() = audioMediaMetaData.map { metaData ->
         val description = MediaDescriptionCompat
             .Builder()
             .setMediaId(metaData.description.mediaId)
